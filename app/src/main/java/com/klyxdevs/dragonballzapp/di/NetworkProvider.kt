@@ -15,12 +15,12 @@ object NetworkProvider {
 
     @Provides
     @Singleton
-    fun retrofitProvider() = Retrofit.Builder()
+    fun retrofitProvider(): Retrofit = Retrofit.Builder()
         .baseUrl("https://dragonball-api.com/api/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     @Provides
     @Singleton
-    fun provideApiService(retrofit: Retrofit) = retrofit.create(ApiClientDBZ::class.java)
+    fun provideApiService(retrofit: Retrofit): ApiClientDBZ = retrofit.create(ApiClientDBZ::class.java)
 }

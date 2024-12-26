@@ -1,6 +1,6 @@
 package com.klyxdevs.dragonballzapp.data.remote.model
 
-import com.klyxdevs.dragonballzapp.domain.model.Characters
+import com.klyxdevs.dragonballzapp.domain.model.CharacterModel
 
 data class CharactersResponse(
     val id: Int,
@@ -13,5 +13,14 @@ data class CharactersResponse(
     val image: String,
     val affiliation: String
 ) {
-    fun toDomain() = Characters(id, name, ki, maxKi, race, gender, description, image, affiliation)
+    fun toDomain() = CharacterModel(
+        id,
+        name, ki,
+        maxKi,
+        race,
+        gender,
+        description,
+        image,
+        affiliation
+    )
 }

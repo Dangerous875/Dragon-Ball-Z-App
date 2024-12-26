@@ -7,5 +7,5 @@ sealed class NavRoutes {
     @Serializable
     data object HomeScreenRoute : NavRoutes()
     @Serializable
-    data class DetailScreenRoute(val id: Int) : NavRoutes()
+    data class DetailScreenRoute(val character: String) : NavRoutes()
 }

@@ -11,5 +11,5 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 abstract class UseCaseModule {
     @Binds
-    abstract fun bindSuperHeroRepository(repository: RepositoryImpl): Repository
+    abstract fun bindRepository(repository: RepositoryImpl): Repository
 }
