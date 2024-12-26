@@ -2,11 +2,14 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.daggerHiltAndroid)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 android {
     namespace = "com.klyxdevs.dragonballzapp"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.klyxdevs.dragonballzapp"
@@ -56,4 +59,33 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    // Dagger + Hilt
+    implementation(libs.google.dagger.hilt.android)
+    ksp(libs.google.dagger.hilt.android.compiler)
+    implementation(libs.google.dagger.hilt.android.testing)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+// Retrofit
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+
+// Coil
+    implementation (libs.coil.compose)
+    implementation (libs.androidx.runtime)
+
+    androidTestImplementation(libs.google.dagger.hilt.android.testing)
+    testImplementation(libs.google.dagger.hilt.android.testing)
+
+//Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.common)
+//constraintLayout
+    implementation(libs.constraintlayout.compose)
+//Serialization and Navigation 2.8.0
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.navigation.compose)
+    //Splash
+    implementation(libs.core.splashscreen)
 }
