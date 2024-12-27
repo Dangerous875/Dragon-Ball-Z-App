@@ -51,6 +51,7 @@ import com.klyxdevs.dragonballzapp.ui.screens.detailScreen.viewmodel.DetailScree
 fun DetailScreen(
     character: CharacterModel,
     navigateBack: () -> Unit,
+    navigateFullScreen: (Transformation) -> Unit,
     viewModel: DetailScreenViewModel = hiltViewModel()
 ) {
     viewModel.getCharacterById(character.id)
@@ -58,7 +59,7 @@ fun DetailScreen(
 
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         characterDetail?.let { character ->
-            ItemDetail(character) { navigateBack() }
+            ItemDetail(character, { navigateBack() }, { navigateFullScreen(it) })
         } ?: run { CircularProgressBar(color = Orange) }
 
     }
@@ -66,7 +67,11 @@ fun DetailScreen(
 }
 
 @Composable
-fun ItemDetail(character: CharacterDetailModel, navigateBack: () -> Unit) {
+fun ItemDetail(
+    character: CharacterDetailModel,
+    navigateBack: () -> Unit,
+    navigateFullScreen: (Transformation) -> Unit
+) {
     Column(
         Modifier
             .fillMaxSize()
@@ -108,7 +113,10 @@ fun ItemDetail(character: CharacterDetailModel, navigateBack: () -> Unit) {
                             Modifier.weight(1f), R.drawable.ic_planet, character.originPlanet.name
                         )
                     }
-                    TransformationList(Modifier.fillMaxSize(), character.transformations)
+                    TransformationList(
+                        Modifier.fillMaxSize(),
+                        character.transformations
+                    ) { navigateFullScreen(it) }
                 }
             }
             AsyncImage(
@@ -139,7 +147,11 @@ fun ItemDetail(character: CharacterDetailModel, navigateBack: () -> Unit) {
 }
 
 @Composable
-fun TransformationList(modifier: Modifier, transformations: List<Transformation>) {
+fun TransformationList(
+    modifier: Modifier,
+    transformations: List<Transformation>,
+    navigateFullScreen: (Transformation) -> Unit
+) {
     Box(modifier = modifier, contentAlignment = Alignment.Center) {
         if (transformations.isEmpty()) {
             Text(text = "No hay transformaciones a día de hoy")
@@ -151,7 +163,7 @@ fun TransformationList(modifier: Modifier, transformations: List<Transformation>
                     pageSize = PageSize.Fixed(pageSize = 150.dp),
                     pageSpacing = 4.dp
                 ) { pos ->
-                    TransformationSticker(transformations[pos])
+                    TransformationSticker(transformations[pos]) { navigateFullScreen(it) }
                 }
             }
         }
@@ -159,9 +171,12 @@ fun TransformationList(modifier: Modifier, transformations: List<Transformation>
 }
 
 @Composable
-fun TransformationSticker(transformationModel: Transformation) {
+fun TransformationSticker(
+    transformationModel: Transformation,
+    navigateFullScreen: (Transformation) -> Unit
+) {
     Card(
-        onClick = {},
+        onClick = { navigateFullScreen(transformationModel) },
         border = BorderStroke(1.dp, Color.Gray.copy(alpha = 0.4f)),
         modifier = Modifier.padding(horizontal = 6.dp, vertical = 24.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 12.dp)
