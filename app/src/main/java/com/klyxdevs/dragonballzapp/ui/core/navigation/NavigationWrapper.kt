@@ -26,7 +26,7 @@ fun NavigationWrapper() {
         composable<DetailScreenRoute> {
             val safeArgs = it.toRoute<DetailScreenRoute>()
             val character = Json.decodeFromString<CharacterModel>(safeArgs.character)
-            DetailScreen(character)
+            DetailScreen(character, navigateBack = { navController.popBackStack() })
         }
     }
 }

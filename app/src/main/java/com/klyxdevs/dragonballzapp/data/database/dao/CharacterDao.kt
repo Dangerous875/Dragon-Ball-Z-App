@@ -17,4 +17,5 @@ interface CharacterDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCharactersDB(characters: List<CharacterEntity>)
+
 }

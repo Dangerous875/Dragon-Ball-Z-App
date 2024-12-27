@@ -2,7 +2,7 @@ package com.klyxdevs.dragonballzapp.ui.screens.homeScreen.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.klyxdevs.dragonballzapp.domain.GetAllCharactersFromApiUseCase
+import com.klyxdevs.dragonballzapp.domain.usecases.GetAllCharactersFromApiUseCase
 import com.klyxdevs.dragonballzapp.domain.model.CharacterModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

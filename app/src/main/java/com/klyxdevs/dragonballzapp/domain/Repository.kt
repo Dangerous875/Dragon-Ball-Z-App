@@ -1,5 +1,6 @@
 package com.klyxdevs.dragonballzapp.domain
 
+import com.klyxdevs.dragonballzapp.domain.model.CharacterDetailModel
 import com.klyxdevs.dragonballzapp.domain.model.CharacterModel
 
 interface Repository {
@@ -11,4 +12,6 @@ interface Repository {
     suspend fun getCharacterByIdFromDB(id: Int): CharacterModel
 
     suspend fun insertCharactersDB(characters: List<CharacterModel>)
+
+    suspend fun getCharacterByIdFromApi(id: Int): CharacterDetailModel?
 }

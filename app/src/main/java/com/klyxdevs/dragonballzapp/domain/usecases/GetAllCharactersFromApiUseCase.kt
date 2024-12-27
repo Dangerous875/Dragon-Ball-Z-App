@@ -1,6 +1,7 @@
-package com.klyxdevs.dragonballzapp.domain
+package com.klyxdevs.dragonballzapp.domain.usecases
 
 import android.util.Log
+import com.klyxdevs.dragonballzapp.domain.Repository
 import com.klyxdevs.dragonballzapp.domain.model.CharacterModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
