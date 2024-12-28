@@ -2,6 +2,7 @@ package com.klyxdevs.dragonballzapp.data.remote.service
 
 import android.util.Log
 import com.klyxdevs.dragonballzapp.data.remote.ApiClientDBZ
+import com.klyxdevs.dragonballzapp.data.remote.model.CharacterDetailResponse
 import com.klyxdevs.dragonballzapp.data.remote.model.CharactersResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -24,4 +25,20 @@ class ApiServiceDBZ @Inject constructor(private val apiService: ApiClientDBZ) {
         }
     }
 
+    suspend fun getCharacterByIdFromApi(id: Int): CharacterDetailResponse? =
+        withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.getCharacterByIdFromApi(id)
+                if (response.isSuccessful) {
+                    response.body()
+                } else {
+                    Log.e("API FAILED", "Error: ${response.code()} - ${response.message()}")
+                    null
+                }
+            } catch (e: Exception) {
+                Log.e("API FAILED", "Unexpected error: ${e.message}")
+                null
+            }
+        }
 }
+

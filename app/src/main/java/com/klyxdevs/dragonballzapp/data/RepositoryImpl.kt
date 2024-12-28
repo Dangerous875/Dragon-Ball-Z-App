@@ -3,6 +3,7 @@ package com.klyxdevs.dragonballzapp.data
 import com.klyxdevs.dragonballzapp.data.database.dao.CharacterDao
 import com.klyxdevs.dragonballzapp.data.remote.service.ApiServiceDBZ
 import com.klyxdevs.dragonballzapp.domain.Repository
+import com.klyxdevs.dragonballzapp.domain.model.CharacterDetailModel
 import com.klyxdevs.dragonballzapp.domain.model.CharacterModel
 import javax.inject.Inject
 
@@ -38,4 +39,8 @@ class RepositoryImpl @Inject constructor(
         characterDao.insertCharactersDB(characters.map { it.toEntity() })
     }
 
+    override suspend fun getCharacterByIdFromApi(id: Int): CharacterDetailModel? {
+        val character = apiServiceDBZ.getCharacterByIdFromApi(id)
+        return character?.toDomain()
+    }
 }

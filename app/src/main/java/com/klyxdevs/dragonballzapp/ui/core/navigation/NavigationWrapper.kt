@@ -5,10 +5,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.klyxdevs.dragonballzapp.data.remote.model.Transformation
 import com.klyxdevs.dragonballzapp.domain.model.CharacterModel
-import com.klyxdevs.dragonballzapp.ui.core.NavRoutes.DetailScreenRoute
-import com.klyxdevs.dragonballzapp.ui.core.NavRoutes.HomeScreenRoute
+import com.klyxdevs.dragonballzapp.ui.core.NavRoutes.*
 import com.klyxdevs.dragonballzapp.ui.screens.detailScreen.DetailScreen
+import com.klyxdevs.dragonballzapp.ui.screens.fullScreenImage.FullScreenImage
 import com.klyxdevs.dragonballzapp.ui.screens.homeScreen.HomeScreen
 import kotlinx.serialization.json.Json
 
@@ -26,7 +27,18 @@ fun NavigationWrapper() {
         composable<DetailScreenRoute> {
             val safeArgs = it.toRoute<DetailScreenRoute>()
             val character = Json.decodeFromString<CharacterModel>(safeArgs.character)
-            DetailScreen(character)
+            DetailScreen(
+                character,
+                navigateBack = { navController.popBackStack() },
+                navigateFullScreen = { characterTransformation ->
+                    navController.navigate(FullScreenRoute(characterTransformation.encodingObject()))
+                })
+        }
+
+        composable<FullScreenRoute> {
+            val safeArgs = it.toRoute<FullScreenRoute>()
+            val character = Json.decodeFromString<Transformation>(safeArgs.character)
+            FullScreenImage(character, navigateBack = { navController.popBackStack() })
         }
     }
 }
