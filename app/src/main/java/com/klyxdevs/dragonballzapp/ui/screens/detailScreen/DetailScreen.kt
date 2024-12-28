@@ -132,7 +132,7 @@ fun ItemDetail(
                     "",
                     tint = Color.White,
                     modifier = Modifier
-                        .padding(8.dp)
+                        .padding(start = 16.dp, top = 16.dp)
                         .size(24.dp)
                         .clickable { navigateBack() }
                 )

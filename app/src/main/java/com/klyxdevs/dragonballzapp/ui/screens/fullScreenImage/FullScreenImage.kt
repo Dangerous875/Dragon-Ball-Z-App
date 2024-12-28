@@ -2,6 +2,7 @@ package com.klyxdevs.dragonballzapp.ui.screens.fullScreenImage
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,29 +26,55 @@ import com.klyxdevs.dragonballzapp.ui.components.DragonBallShapeDetail
 import com.klyxdevs.dragonballzapp.ui.core.colors.Orange
 
 @Composable
-fun FullScreenImage(character : Transformation){
+fun FullScreenImage(character: Transformation, navigateBack: () -> Unit) {
     Card(
         border = BorderStroke(1.dp, Color.Gray.copy(alpha = 0.4f)),
-        modifier = Modifier.fillMaxSize().background(Orange),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Orange)
+            .clickable { navigateBack() },
         elevation = CardDefaults.cardElevation(defaultElevation = 12.dp)
     ) {
         Column(Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Box(modifier = Modifier.weight(0.8f).fillMaxSize()){
-                Box(modifier = Modifier.align(Alignment.TopStart).padding(start = 8.dp, top = 8.dp)){
+            Box(
+                modifier = Modifier
+                    .weight(0.8f)
+                    .fillMaxSize()
+            ) {
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.TopStart)
+                        .padding(start = 8.dp, top = 8.dp)
+                ) {
                     DragonBallShapeDetail()
                 }
-                Box(modifier = Modifier.align(Alignment.TopEnd).padding(end = 8.dp, top = 8.dp)){
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(end = 8.dp, top = 8.dp)
+                ) {
                     DragonBallShapeDetail()
                 }
-                Box(modifier = Modifier.align(Alignment.BottomStart).padding(start = 8.dp, bottom = 8.dp)){
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(start = 8.dp, bottom = 8.dp)
+                ) {
                     DragonBallShapeDetail()
                 }
-                Box(modifier = Modifier.align(Alignment.BottomEnd).padding(end = 8.dp, bottom = 8.dp)){
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(end = 8.dp, bottom = 8.dp)
+                ) {
                     DragonBallShapeDetail()
                 }
                 AsyncImage(
-                    modifier = Modifier.align(Alignment.Center).fillMaxSize(),
-                    model = character.image, contentDescription = "")
+                    modifier = Modifier
+                        .align(Alignment.Center)
+                        .fillMaxSize(),
+                    model = character.image, contentDescription = ""
+                )
 
             }
 

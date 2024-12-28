@@ -38,7 +38,7 @@ fun NavigationWrapper() {
         composable<FullScreenRoute> {
             val safeArgs = it.toRoute<FullScreenRoute>()
             val character = Json.decodeFromString<Transformation>(safeArgs.character)
-            FullScreenImage(character)
+            FullScreenImage(character, navigateBack = { navController.popBackStack() })
         }
     }
 }
